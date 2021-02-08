@@ -2,11 +2,7 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": [
-      "../tsconfig.json",
-      "tsconfig.json",
-      "./tsconfig.json"
-    ],
+    "project": "./tsconfig.json",
     "ecmaVersion": 2020,
     "sourceType": "module",
     "ecmaFeatures": {
@@ -37,6 +33,7 @@
       "never",
       {"objectsInObjects": true}
     ],
+    "@typescript-eslint/comma-dangle": ["warn", "never"],
     "semi": ["warn", "always"],
     "prefer-const": "warn",
     "no-var": "error",
@@ -57,13 +54,13 @@
     "wrap-iife": "error",
     "no-loop-func": "error",
     "prefer-rest-params": "error",
-    "default-param-last": "error",
+    "default-param-last": "off",
     "no-new-func": "error",
     // "space-before-function-paren": "warn",
     "space-before-blocks": "warn",
     "no-param-reassign": "error",
     "prefer-spread": "warn",
-    "function-call-argument-newline": ["warn", "never"],
+    //    "function-call-argument-newline": ["warn", "never"],
     "prefer-arrow-callback": "error",
     "arrow-spacing": "warn",
     "arrow-parens": "warn",
@@ -75,7 +72,7 @@
     "class-methods-use-this": "error",
     "no-duplicate-imports": "error",
     "import/no-mutable-exports": "error",
-    "import/prefer-default-export": "error",
+    "import/prefer-default-export": ["off"],
     "import/first": "warn",
     "object-curly-newline": ["warn", {"multiline": true}],
     "import/no-webpack-loader-syntax": "warn",
@@ -96,7 +93,7 @@
     "brace-style": "warn",
     "no-else-return": "error",
     "spaced-comment": "warn",
-    "indent": ["warn", 2],
+    "indent": ["off"],
     "keyword-spacing": "warn",
     "space-infix-ops": "warn",
     "eol-last": "warn",
@@ -113,11 +110,13 @@
     "func-call-spacing": "warn",
     "key-spacing": "warn",
     "no-trailing-spaces": "warn",
+    "@typescript-eslint/indent": ["warn", 2],
     "comma-style": "warn",
-    "comma-dangle": "warn",
+    "comma-dangle": ["warn", "never"],
     "no-new-wrappers": "warn",
     "radix": ["warn", "always"],
     "camelcase": "warn",
-    "new-cap": "warn"
+    "new-cap": "warn",
+    "react/jsx-one-expression-per-line": "warn"
   }
 }

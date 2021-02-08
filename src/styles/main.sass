@@ -1,0 +1,89 @@
+@import "fonts"
+@import "normalize"
+@import "variables"
+@import "mixins"
+
+html
+  font-size: 62.5%
+  color: #ffffff
+
+.app
+  display: flex
+  background: $gradient-morning-clear
+  min-width: 100vw
+  min-height: 100vh
+  font-family: "Work Sans", sans-serif
+  &::before
+    content: ""
+    background: url("../img/grain-img.png")
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+
+.container
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  width: 60%
+  height: 70vh
+  margin: auto
+  text-align: center
+  position: relative
+.input
+  border-radius: .7rem
+  background: rgba(0,0,0,.5)
+  border: none
+  outline: none
+  font-size: 1.6rem
+  margin-left: auto
+  margin-right: auto
+  width: 25%
+  &-text
+    padding: 1.5rem
+    color: white
+    background: transparent
+    width: 70%
+    margin: auto
+    border: none
+    outline: none
+    white-space: nowrap
+    overflow-x: hidden
+    font-weight: 500
+    &:hover
+      cursor: text
+    &:empty:not(:focus):before
+      content: attr(placeholder)
+
+.info
+  &-location
+    color: #ffffff
+    font-family: "Work Sans", sans-serif
+    font-weight: 500
+  &-temp
+    font-size: 13rem
+    font-weight: 300
+    span
+      font-size: 6rem
+      vertical-align: top
+.city
+  font-size: 2.7rem
+  display: block
+.country
+  font-size: 2rem
+  display: block
+  opacity: .5
+.scale
+  &-value
+    &__precipitation
+      width: 3rem
+      height: 3rem
+    &__date
+      opacity: .5
+      font-size: 1.4rem
+      font-weight: 500
+    &__time
+      font-size: 2.4rem
+
+
