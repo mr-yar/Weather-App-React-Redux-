@@ -27,8 +27,8 @@ export function Input(): JSX.Element {
   function keyPressInput(event: any) {
     if (event.key === 'Enter') {
       apiCitySearch(inputValue);
+      dispatch(inputHandler(''));
     }
-    dispatch(inputHandler(''));
   }
 
   return (
@@ -40,6 +40,7 @@ export function Input(): JSX.Element {
         placeholder="Enter city..."
         onChange={(event) => handleInput(event)}
         onKeyPress={keyPressInput}
+        value={inputValue}
       />
     </div>
   );
