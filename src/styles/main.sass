@@ -9,18 +9,31 @@ html
 
 .app
   display: flex
-  background: $gradient-morning-clear
   min-width: 100vw
   min-height: 100vh
   font-family: "Work Sans", sans-serif
-  &::before
-    content: ""
-    background: url("../img/grain-img.png")
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
+  //&::before
+  //  content: ""
+  //  background: url("../img/noise.png")
+  //  background-blend-mode: overlay
+  //  position: absolute
+  //  top: 0
+  //  right: 0
+  //  bottom: 0
+  //  left: 0
+  &-day-clear
+    background: $gradient-day-clear
+  &-day-rain
+    background: $gradient-day-rain
+  &-day-atmosphere
+    background: $gradient-atmosphere
+  &-day-cloud
+    background: $gradient-day-cloud
+
+  &-night-clear
+    background: $gradient-night-clear
+  &-night-cloud
+    background: $gradient-night-cloud
 
 .container
   display: flex
@@ -77,13 +90,24 @@ html
 .scale
   &-value
     &__precipitation
-      width: 3rem
-      height: 3rem
+      width: 4rem
+      height: 4rem
     &__date
-      opacity: .5
-      font-size: 1.4rem
+      opacity: .7
+      font-size: 1.6rem
       font-weight: 500
+      padding-top: 1rem
     &__time
-      font-size: 2.4rem
+      display: flex
+      justify-content: center
+      font-size: 3.2rem
+      span
+        width: 3.8rem
+        &:last-child
+          text-align: left
+          padding-left: .2rem
+      div
+       padding-left: .2rem
+       padding-right: .2rem
 
 

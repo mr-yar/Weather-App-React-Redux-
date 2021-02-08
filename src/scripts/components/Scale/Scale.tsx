@@ -10,6 +10,7 @@ import {
   dateGetSeconds,
   dateGetYear
 } from './date';
+import {getDateTimeZone} from './setBg';
 
 export function Scale(): JSX.Element {
   const weather = useSelector(
@@ -19,11 +20,14 @@ export function Scale(): JSX.Element {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setDate(new Date());
-    }, 1000);
+    let interval: ReturnType<typeof setInterval>;
+    if (weather !== null && weather.cod !== '404') {
+      interval = setInterval(() => {
+        setDate(getDateTimeZone(weather.timezone || null));
+      }, 1000);
+    }
     return () => clearInterval(interval);
-  }, []);
+  }, [weather]);
 
   if (weather === null || weather.cod === '404') {
     return <div />;
@@ -34,17 +38,24 @@ export function Scale(): JSX.Element {
       <div className="scale-value">
         <Precipitation />
         <div className="scale-value__date">
-          <span>{dateGetDate(date)}</span>
-          :
-          <span>{dateGetMonth(date)}</span>
-          :
-          <span>{dateGetYear(date)}</span>
+          <span>
+            {dateGetDate(date)}
+            {' '}
+          </span>
+          <span>
+            {dateGetMonth(date)}
+            {' '}
+          </span>
+          <span>
+            {dateGetYear(date)}
+            {' '}
+          </span>
         </div>
         <div className="scale-value__time">
           <span>{dateGetHours(date)}</span>
-          :
+          <div>:</div>
           <span>{dateGetMinutes(date)}</span>
-          :
+          <div>:</div>
           <span>{dateGetSeconds(date)}</span>
         </div>
       </div>

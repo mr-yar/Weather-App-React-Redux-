@@ -15,10 +15,7 @@ export function Input(): JSX.Element {
     const url = `https://${API_ADRESS}?q=${cityName}&appid=${API_KEY}&units=metric`;
 
     return fetch(url)
-      .then(
-        (response) => response.json(),
-        (reject) => console.log(reject)
-      )
+      .then((response) => response.json())
       .then((result) => dispatch(inputSearch(result)));
   }
 
@@ -31,6 +28,7 @@ export function Input(): JSX.Element {
     if (event.key === 'Enter') {
       apiCitySearch(inputValue);
     }
+    dispatch(inputHandler(''));
   }
 
   return (
