@@ -1,21 +1,24 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/reducers/rootReducer';
-import weatherCloud from '../../../svg/ic-weather-cloud.svg';
-import weatherCloudy from '../../../svg/ic-weather-cloudy.svg';
-import weatherDrop from '../../../svg/ic-weather-drop.svg';
-import weatherMoon from '../../../svg/ic-weather-moon.svg';
-import weatherSnow from '../../../svg/ic-weather-snow.svg';
-import weatherSunny from '../../../svg/ic-weather-sunny.svg';
-import weatherUmbrella from '../../../svg/ic-weather-umbrella.svg';
-import weatherWind from '../../../svg/ic-weather-wind.svg';
-import weatherWindStorm from '../../../svg/ic-weather-wind-storm.svg';
-import weatherWindStormRain from '../../../svg/ic-weather-wind-storm-rain.svg';
+import {RootState} from '../../redux/store';
+import weatherCloud from '../../svg/ic-weather-cloud.svg';
+import weatherCloudy from '../../svg/ic-weather-cloudy.svg';
+import weatherDrop from '../../svg/ic-weather-drop.svg';
+import weatherMoon from '../../svg/ic-weather-moon.svg';
+import weatherSnow from '../../svg/ic-weather-snow.svg';
+import weatherSunny from '../../svg/ic-weather-sunny.svg';
+import weatherUmbrella from '../../svg/ic-weather-umbrella.svg';
+import weatherWind from '../../svg/ic-weather-wind.svg';
+import weatherWindStorm from '../../svg/ic-weather-wind-storm.svg';
+import weatherWindStormRain from '../../svg/ic-weather-wind-storm-rain.svg';
 
-export function Precipitation(): JSX.Element {
-  const weather = useSelector(
-    (state: RootState) => state.inputReducer.weather
+export function Precipitation({weather}: any): JSX.Element {
+  const isLoading = useSelector(
+    (state: RootState) => state.inputReducer.loading
   );
+  if (!weather || isLoading) {
+    return <div />;
+  }
 
   const precipitationId = weather.weather[0].id;
 
@@ -38,10 +41,7 @@ export function Precipitation(): JSX.Element {
         return weatherWind;
 
       case id === 800:
-        if (
-          new Date().getHours() <= 6
-          || new Date().getHours() >= 20
-        ) {
+        if (new Date().getHours() <= 6 || new Date().getHours() >= 20) {
           return weatherMoon;
         }
         return weatherSunny;

@@ -1,20 +1,35 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {RootState} from '../redux/store';
 
-import {RootState} from '../redux/reducers/rootReducer';
-
-export function Info(): JSX.Element {
-  const weather = useSelector(
-    (state: RootState) => state.inputReducer.weather
+export function Info({weather}: any): JSX.Element {
+  const isLoading = useSelector(
+    (state: RootState) => state.inputReducer.loading
   );
+  if (weather === null) {
+    return (
+      <div>
+        <h1>Enter city</h1>
+      </div>
+    );
+  }
 
-  if (weather === null || weather.cod === '404') {
+  if (weather.cod === '404') {
     return (
       <div>
         <h1>City wasn&apos;t found</h1>
       </div>
     );
   }
+
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Loading... Please wait</h1>
+      </div>
+    );
+  }
+
   const city = weather.name;
 
   const {country} = weather.sys;

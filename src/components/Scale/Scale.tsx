@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/reducers/rootReducer';
 import {Precipitation} from './Precipitation';
 import {
   dateGetDate,
@@ -11,16 +10,18 @@ import {
   dateGetYear
 } from './date';
 import {getDateTimeZone} from './setBg';
+import {RootState} from '../../redux/store';
 
-export function Scale(): JSX.Element {
-  const weather = useSelector(
-    (state: RootState) => state.inputReducer.weather
-  );
-
+export function Scale({weather}: any): JSX.Element {
   const [date, setDate] = useState(new Date());
+
+  const isLoading = useSelector(
+    (state: RootState) => state.inputReducer.loading
+  );
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
+
     if (weather !== null && weather.cod !== '404') {
       interval = setInterval(() => {
         setDate(getDateTimeZone(weather.timezone || null));
@@ -29,14 +30,14 @@ export function Scale(): JSX.Element {
     return () => clearInterval(interval);
   }, [weather]);
 
-  if (weather === null || weather.cod === '404') {
+  if (weather === null || isLoading || weather.cod === '404') {
     return <div />;
   }
 
   return (
     <div className="scale">
       <div className="scale-value">
-        <Precipitation />
+        <Precipitation weather={weather} />
         <div className="scale-value__date">
           <span>
             {dateGetDate(date)}
