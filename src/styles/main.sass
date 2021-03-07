@@ -30,7 +30,7 @@ button
   font-family: "Work Sans", sans-serif
   &::before
     content: ""
-    background: url("../components/Main/noisy.png")
+    background: url("../common/noisy.png")
     position: absolute
     opacity: .7
     top: 0
@@ -82,6 +82,7 @@ button
     white-space: nowrap
     overflow-x: hidden
     font-weight: 500
+    font-size: 2rem
     &:hover
       cursor: text
     &:empty:not(:focus):before
@@ -166,10 +167,13 @@ button
       width: 2rem
       height: 2rem
 .hours
+
   position: relative
   width: 100%
-  height: 70%
+  height: 60%
   mask-image: linear-gradient(rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100% )
+.precipitation-img
+  width: 100%
 .hour
   display: flex
   padding: 1.5rem 2rem
@@ -212,13 +216,15 @@ button
       height: 2.5rem
 .days
   display: flex
-
-  overflow-x: hidden
+  max-width: 100%
+  overflow-x: auto
+  max-height: 100%
 .day
   border-radius: 1.6rem 1.6rem 0 0
   padding: 2rem
   &.selected
     background-color: rgba(255, 255, 255, 0.25)
+    transition: all .1s ease-in
   &-info
     color: #ffffff
     font-family: "Work Sans", sans-serif
@@ -235,23 +241,129 @@ button
     width: 80%
   .input
     width: 30%
+  .forecast
+    &-table
+      width: 60%
 @media screen and (max-width: 1200px)
   html
     font-size: 70%
   .input
     width: 50%
+  .forecast
+    &-table
+      width: 70%
 
 @media screen and (max-width: 992px)
   html
     font-size: 80%
   .input
     width: 70%
+  .forecast
+    &-table
+      width: 80%
 @media screen and (max-width: 768px)
   html
     font-size: 90%
-  .container
-    height: 80vh
+
   .input
     width: 90%
+  .forecast
+    &-table
+      width: 90%
+    &-header
+      margin-bottom: 2rem
+  .hours
+    mask-image: linear-gradient(black 90%, rgba(0, 0, 0, 0) 100%)
+    margin-bottom: 2rem
 @media screen and (max-width: 576px)
-
+  .container
+    width: 100%
+    height: 90vh
+    margin-bottom: 0
+  .forecast-close
+    position: absolute
+    right: 0
+    top: .5rem
+  .precipitation-img
+    width: 32rem
+  .hour
+    padding: 0
+    &-info
+      &-precipitation
+        margin-right: .5rem
+        width: 35%
+      &-time
+        opacity: 0.6
+        font-size: 1.2rem
+        font-weight: 400
+        margin-bottom: .3rem
+      &-temp
+        font-size: 1.7rem
+    &-details
+      display: flex
+      flex-direction: column
+      justify-content: center
+      &-section
+        display: flex
+        align-items: center
+        &-text
+          opacity: .7
+          font-size: 1.2rem
+      &-img
+        margin-right: .6rem
+        width: 2rem
+        height: 2rem
+  .day
+    max-height: 100%
+    padding: 1rem
+    &.selected
+      background-color: rgba(255, 255, 255, 0.25)
+      transition: all .1s ease-in
+    &-precipitation
+      width: 3rem
+      height: 3rem
+    &-info
+      &-dayOfWeek
+        font-size: 1rem
+      &-temp
+        font-size: 1.4rem
+  .info
+    &-location
+      color: #ffffff
+      font-family: "Work Sans", sans-serif
+      font-weight: 500
+    &-temp
+      font-size: 8rem
+      font-weight: 300
+      span
+        font-size: 4rem
+        vertical-align: top
+  .city
+    font-size: 1.5rem
+    display: block
+  .input
+    &-text
+      padding: 0.7rem
+      font-size: 1.4rem
+  .scale-button
+    padding: 1rem 2rem
+    font-size: 1.4rem
+    margin-bottom: 2rem
+  .scale
+    &-value
+      &__date
+        font-size: 1.2rem
+        font-weight: 500
+        padding-top: 1rem
+      &__time
+        display: flex
+        justify-content: center
+        font-size: 2rem
+        span
+          width: 3rem
+          &:last-child
+            text-align: left
+            padding-left: .1rem
+        div
+          padding-left: .1rem
+          padding-right: .1rem

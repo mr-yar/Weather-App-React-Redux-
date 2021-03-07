@@ -23,7 +23,7 @@ export const Day = (props: IDayProps): JSX.Element => {
       onClick={selectDay}
     >
       <div className="day-precipitation">
-        <Precipitation weather={forecastDay[0]} size="3rem" />
+        <Precipitation weather={forecastDay[0]} size="5rem" />
       </div>
       <div className="day-info">
         <div className="day-info-dayOfWeek">{dateGetDay(date)}</div>

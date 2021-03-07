@@ -57,6 +57,11 @@ export function Precipitation({weather, size}: IPrecipitationProps): JSX.Element
   }
 
   return (
-    <img style={{width: size, height: size}} alt="" src={setIcon(precipitationId)} />
+    <img
+      style={{width: size, height: size, maxWidth: '100%', maxHeight: '100%'}}
+      className="precipitation-img"
+      alt=""
+      src={setIcon(precipitationId)}
+    />
   );
 }
