@@ -1,12 +1,16 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {RootState} from '../redux/store';
+import {RootState} from '../../redux/store';
+import {IWeather} from '../../common/types';
 
-export function Info({weather}: any): JSX.Element {
-  const isLoading = useSelector(
-    (state: RootState) => state.inputReducer.loading
-  );
-  if (weather === null) {
+export interface InfoProps {
+  weather: IWeather;
+  temp?: boolean;
+}
+export function Info({weather, temp}: InfoProps): JSX.Element {
+  const isLoading = useSelector((state: RootState) => state.inputReducer.loading);
+
+  if (weather.cod === 0) {
     return (
       <div>
         <h1>Enter city</h1>
@@ -14,7 +18,7 @@ export function Info({weather}: any): JSX.Element {
     );
   }
 
-  if (weather.cod === '404') {
+  if (weather.cod === 404) {
     return (
       <div>
         <h1>City wasn&apos;t found</h1>
@@ -34,17 +38,21 @@ export function Info({weather}: any): JSX.Element {
 
   const {country} = weather.sys;
 
-  const {temp} = weather.main;
+  const temperature = Math.floor(weather.main.temp);
   return (
     <div className="info">
       <div className="info-location">
         <span className="city">{city}</span>
         <span className="country">{country}</span>
       </div>
-      <div className="info-temp">
-        {Math.floor(temp)}
-        <span>°</span>
-      </div>
+      {temp ? (
+        <div className="info-temp">
+          {temperature}
+          <span>°</span>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

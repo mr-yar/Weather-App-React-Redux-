@@ -1,43 +1,44 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {Precipitation} from './Precipitation';
+import {Link} from 'react-router-dom';
+import {Precipitation} from '../Precipitation/Precipitation';
 import {
   dateGetDate,
   dateGetHours,
   dateGetMinutes,
   dateGetMonth,
   dateGetSeconds,
-  dateGetYear
-} from './date';
-import {getDateTimeZone} from './setBg';
+  dateGetYear,
+  getLocalDate
+} from '../../common/utils';
 import {RootState} from '../../redux/store';
+import {IWeather} from '../../common/types';
 
-export function Scale({weather}: any): JSX.Element {
+export function Scale({weather}: {weather: IWeather}): JSX.Element {
   const [date, setDate] = useState(new Date());
 
-  const isLoading = useSelector(
-    (state: RootState) => state.inputReducer.loading
-  );
+  const isLoading = useSelector((state: RootState) => state.inputReducer.loading);
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
 
-    if (weather !== null && weather.cod !== '404') {
+    if (weather.cod !== 0 && weather.cod !== 404) {
       interval = setInterval(() => {
-        setDate(getDateTimeZone(weather.timezone || null));
-      }, 1000);
+        const d = new Date();
+        setDate(getLocalDate(weather.timezone || 0, d));
+      }, 500);
     }
     return () => clearInterval(interval);
   }, [weather]);
 
-  if (weather === null || isLoading || weather.cod === '404') {
+  if (weather.cod === 0 || isLoading || weather.cod === 404) {
     return <div />;
   }
 
   return (
     <div className="scale">
       <div className="scale-value">
-        <Precipitation weather={weather} />
+        <Precipitation weather={weather} size="4rem" />
         <div className="scale-value__date">
           <span>
             {dateGetDate(date)}
@@ -60,6 +61,11 @@ export function Scale({weather}: any): JSX.Element {
           <span>{dateGetSeconds(date)}</span>
         </div>
       </div>
+      <Link to="/forecast">
+        <button type="button" className="scale-button">
+          Подробный прогноз
+        </button>
+      </Link>
     </div>
   );
 }

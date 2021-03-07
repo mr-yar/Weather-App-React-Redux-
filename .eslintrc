@@ -150,6 +150,8 @@
     "react/jsx-curly-brace-presence": "warn",
     "react/jsx-props-no-spreading": "off",
     "react/destructuring-assignment": "warn",
-    "react/jsx-curly-newline": "warn"
+    "react/jsx-curly-newline": "warn",
+    "@typescript-eslint/no-unused-expressions": "warn",
+    "react/require-default-props": "off"
   }
 }

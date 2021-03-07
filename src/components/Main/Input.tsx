@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../redux/store';
+import {RootState} from '../../redux/store';
 import {
   inputHandlerAction,
   inputSearchLoadAction
-} from '../redux/reducers/inputReducer';
+} from '../../redux/reducers/inputReducer';
 
 export function Input(): JSX.Element {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export function Input(): JSX.Element {
     dispatch(inputHandlerAction(value));
   }
 
-  function keyPressInput(event: any) {
+  function keyPressInput(event: React.KeyboardEvent) {
     if (event.key === 'Enter') {
       dispatch(inputSearchLoadAction(inputValue));
       dispatch(inputHandlerAction(''));
@@ -27,7 +27,6 @@ export function Input(): JSX.Element {
     <div className="input">
       <input
         className="input-text"
-        // contentEditable="true"
         spellCheck="false"
         placeholder="Enter city..."
         onChange={(event) => handleInput(event)}
